@@ -31,7 +31,7 @@ export async function apiCall429Aware<T>(
 ) {
   for (;;) {
     try {
-      return await apiCall<T>(cdsName, path, authToken, config);
+      return await apiCall<T>(cdsName, authToken, path, config);
     } catch (e) {
       const axiosError = e as AxiosError;
       if (axiosError.status !== 429) {
