@@ -14,7 +14,7 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^1.4.0",
-    "grindery-nexus-common-utils": "^2.0.19",
+    "grindery-nexus-common-utils": "^2.0.21",
     "lodash": "^4.17.21",
     "uuid": "^8.3.2"
   },
