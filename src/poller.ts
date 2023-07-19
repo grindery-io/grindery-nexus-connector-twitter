@@ -131,8 +131,8 @@ class FairPoller<T> {
 const pollerCache = createCache<FairPoller<unknown>>();
 export async function getPoller<T>(config: ConstructorParameters<typeof FairPoller<unknown>>[0]) {
   const userId = await getApiUserId(config.cdsName, config.authToken);
-  return (await pollerCache(
-    `${userId}/${config.pathTemplate.replace(/\?.*$/g, "")}`,
-    async () => new FairPoller(config)
-  )) as FairPoller<T>;
+  return (await pollerCache(`${userId}/${config.pathTemplate.replace(/\?.*$/g, "")}`, async function () {
+    console.log(`Creating poller: ${userId}/${config.pathTemplate}/${config.numRequestsPerWindow}/${config.windowMs}`);
+    return new FairPoller(config);
+  })) as FairPoller<T>;
 }
