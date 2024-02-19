@@ -53,7 +53,9 @@ class FairPoller<T> {
     } catch (e) {
       const axiosError = e as AxiosError;
       console.error(
-        `[${this.pathTemplate} / ${item}] Request error ${axiosError.status || "<unknown>"}`,
+        `[${this.pathTemplate.replace("%s", "<param>")} / ${item}] Request error ${
+          axiosError.isAxiosError ? axiosError.status || axiosError.message || "<unknown>" : e?.toString()
+        }`,
         axiosError?.response ? _.pick(axiosError?.response || {}, ["config", "headers", "data"]) : e
       );
       if (axiosError.status === 429) {
